@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crona Playground — собери свою идею</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+<meta name="description" content="Попробуй 2D и 3D эффекты, сохрани свои настройки и собери визуальный бриф для проекта.">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="playground.css?v=auto-intro-2">
+<link rel="stylesheet" href="site-builder.css">
+</head>
+<body>
+
+<!-- ============ ИНТРО ============ -->
+<div class="boot phase-window" id="boot">
+  <div class="wallpaper"></div>
+  <div class="app-window" id="appWindow">
+    <div class="win-bar"><div class="win-dots"><i></i><i></i><i></i></div><div class="win-title">CRONA / PLAYGROUND</div><span class="boot-tag">WELCOME</span></div>
+    <div class="win-body">
+      <div class="boot-kicker">МАЛЕНЬКАЯ ПАУЗА ПЕРЕД ИДЕЯМИ</div>
+      <div class="cat-holder" data-cat></div>
+      <h1>Давай поиграем.</h1>
+      <p id="bootStatus" role="status">Готовим пространство для экспериментов…</p>
+      <div id="bootProgress" class="boot-progress"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ПРИЛОЖЕНИЕ ============ -->
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3l7.5 4.3v8.6L12 20.2 4.5 15.9V7.3L12 3z"/><path d="M12 11.6l7.5-4.3M12 11.6v8.6M12 11.6L4.5 7.3"/>
+        </svg>
+      </span>
+      <div class="brand-txt"><b>crona.</b><small>PLAYGROUND</small></div>
+      <button class="fav-btn" id="favBtn" title="Избранные модули">
+        <svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/></svg>
+        <span>Избранное <b id="favCount">0</b></span>
+      </button>
+    </div>
+
+    <div class="catalog-intro"><span>01 / ВЫБЕРИ И ПОПРОБУЙ</span><p>Детали для твоего<br>следующего сайта.</p></div><label class="category-label">Категория<select id="category"><option value="all">Все модули</option><option value="background">Фоны</option><option value="button">Кнопки</option><option value="object">3D-объекты</option><option value="scene">Пространство</option></select></label>
+<nav class="mod-list" id="modList"></nav>
+
+    <div class="side-foot">
+      <!-- старт: серый фон, подсказка у самого переключателя 2D/3D -->
+      <div class="start-hint" id="startHint">
+        <span>нажми</span>
+        <svg class="sh-arrow" viewBox="0 0 24 24"><path d="M12 3v13.5M5.5 11L12 17.8 18.5 11" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="mode-switch" id="modeSwitch" data-mode="">
+        <button class="ms-seg" data-dim="2d">2D</button>
+        <button class="ms-seg" data-dim="3d">3D</button>
+        <span class="ms-knob" aria-hidden="true"></span>
+      </div>
+      <div class="foot-hint"><a href="https://vlevickij683-a11y.github.io/crona-development/" target="_blank" rel="noopener">← На сайт Crona</a></div>
+    </div>
+  </aside>
+
+  <main class="workspace">
+    <header class="ws-head">
+      <div class="ws-title" id="wsTitle">ожидание выбора</div>
+      <div class="ws-meta"><button id="saveVariant" class="primary" disabled>☆ Сохранить вариант</button>
+        <span class="meta-chip accent" id="modeChip">—</span>
+      </div>
+    </header>
+
+    <div class="module-summary" id="moduleSummary">Выбери 2D или 3D, открой модуль и настрой его под свою идею.</div>
+    <div class="stage" id="stage">
+      <div id="buttonDemo" hidden></div><div id="aeroStatus" role="status" hidden></div>
+      <canvas id="gl"></canvas>
+      <canvas id="gridgl"></canvas>
+      <canvas id="aeroGl"></canvas>
+
+      <div class="stage-hint hide" id="stageHint">
+        <span class="hint-ring"></span>
+        выбери модуль в меню слева
+      </div>
+
+      <!-- кнопки для 2D-сцены -->
+      <div class="stage-act" id="stageAct">
+        <button data-act="burst">Импульс</button>
+        <button data-act="attract">Притяжение</button>
+        <button data-act="repel">Отталкивание</button>
+      </div>
+
+      <div class="fade-veil" id="veil"></div>
+      <section class="panel" id="panel"></section>
+    </div>
+  </main>
+</div>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- контекстное меню -->
+<div class="ctx-menu" id="ctxMenu">
+  <button data-act="open">Открыть панель</button>
+  <button data-act="settings">Настройки</button>
+  <button data-act="forget">Забыть имя</button>
+</div>
+
+<!-- избранное -->
+<dialog id="briefDialog" aria-labelledby="briefTitle">
+ <header class="brief-head"><div><span class="eyebrow">02 / ТВОЯ ПОДБОРКА</span><h2 id="briefTitle">Избранное</h2></div><button id="closeBrief" aria-label="Закрыть избранное">✕</button></header>
+ <p class="brief-help">Сохраняй разные варианты одного эффекта. Добавляй пожелания — они попадут в бриф.</p>
+ <div class="brief-tabs"><button data-tab="2d">2D <span></span></button><button data-tab="3d">3D <span></span></button></div>
+ <div id="savedList"></div>
+ <label class="project-note">Общее пожелание к сайту<textarea id="projectNote" maxlength="10000" placeholder="Для кого сайт, какой нужен характер, что важно учесть…"></textarea></label>
+ <footer class="brief-actions"><button id="showExport" class="primary">Собрать бриф ↗</button><span>Сохраняется в этом браузере</span></footer>
+</dialog>
+<dialog id="exportDialog" aria-labelledby="exportTitle"><header class="brief-head"><div><span class="eyebrow">03 / ПЕРЕДАЙ СВОЮ ИДЕЮ</span><h2 id="exportTitle">Готовый бриф</h2></div><button id="closeExport" aria-label="Закрыть бриф">✕</button></header><p class="brief-help">Скопируй текст или скачай файл и отправь разработчику. В настройках указаны только отличия от исходных.</p><textarea id="exportText" readonly aria-label="Текст брифа"></textarea><footer class="brief-actions"><button id="copyBrief" class="primary">Скопировать</button><button id="downloadBrief" class="secondary">Скачать TXT ↓</button></footer></dialog>
+<div id="toast" role="status"></div>
+
+<!-- миниатюра модуля при наведении -->
+<div class="mod-peek" id="modPeek">
+  <canvas id="peekCv" width="192" height="120"></canvas>
+  <span class="peek-name" id="peekName"></span>
+</div>
+
+<!-- модалка настроек -->
+<div class="modal-back" id="modalBack">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose" aria-label="закрыть">&times;</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script src="brief-core.js"></script>
+<script src="app.js?v=auto-intro-2"></script>
+<script src="playground.js"></script>
+<script src="builder-core.js"></script>
+<script src="site-builder.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "layout": "split",
+  "theme": "dark",
+  "accent": "#ac87fa",
+  "background": "mesh",
+  "intensity": 55,
+  "motion": true,
+  "font": "sans",
+  "cardStyle": "glass",
+  "radius": 24,
+  "density": "comfortable",
+  "brand": "FORMA",
+  "eyebrow": "НЕЗАВИСИМАЯ СТУДИЯ",
+  "title": "Хорошие идеи\nзаслуживают формы.",
+  "subtitle": "Создаём цифровые пространства, в которых хочется остаться. От первой мысли до последней детали.",
+  "cardTitle": "Внимание к деталям",
+  "cardText": "Ясная структура. Выразительный характер. Опыт, который запоминается.",
+  "contactTitle": "Создадим что-то вместе?",
+  "contactText": "Расскажи о своей идее. Мы поможем ей обрести форму.",
+  "heroAlign": "left",
+  "heroButtons": "row",
+  "cardAlign": "left",
+  "footerAlign": "center",
+  "headerSide": "right",
+  "buttons": {
+    "nav": {
+      "text": "Обсудить проект",
+      "style": "outline",
+      "placement": "header",
+      "color": "auto",
+      "customColor": "#9060d0",
+      "radius": 14,
+      "size": "medium",
+      "visible": true
+    },
+    "primary": {
+      "text": "Начать проект",
+      "style": "glow",
+      "placement": "hero",
+      "color": "auto",
+      "customColor": "#9060d0",
+      "radius": 14,
+      "size": "medium",
+      "visible": true
+    },
+    "secondary": {
+      "text": "Посмотреть работы",
+      "style": "outline",
+      "placement": "hero",
+      "color": "auto",
+      "customColor": "#9060d0",
+      "radius": 14,
+      "size": "medium",
+      "visible": true
+    },
+    "card": {
+      "text": "Узнать больше",
+      "style": "text",
+      "placement": "card",
+      "color": "auto",
+      "customColor": "#9060d0",
+      "radius": 14,
+      "size": "medium",
+      "visible": true
+    },
+    "footer": {
+      "text": "Давай обсудим",
+      "style": "lift",
+      "placement": "footer",
+      "color": "auto",
+      "customColor": "#9060d0",
+      "radius": 14,
+      "size": "medium",
+      "visible": true
+    }
+  }
+}

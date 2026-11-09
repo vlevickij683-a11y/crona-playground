@@ -1,0 +1,6 @@
+dist/
+.DS_Store
+*.log
+.openai/*.tar.gz
+
+.openai/workflow/
